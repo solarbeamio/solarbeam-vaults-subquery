@@ -1,0 +1,38 @@
+specVersion: 0.2.0
+name: solarbeam-vaults-subquery
+version: 1.0.0
+description: Vaults subquery
+repository: ''
+schema:
+  file: ./schema.graphql
+network:
+  genesisHash: '0x401a1f9dca3da46f5c4091016c8a2f26dcea05865116b286f60f668207d1474b'
+  endpoint: wss://moonriver.api.onfinality.io/public-ws
+  dictionary: 'https://api.subquery.network/sq/subquery/moonriver-dictionary'
+  chaintypes:
+    file: "./types.yaml"
+dataSources:
+  - kind: substrate/Moonbeam
+    startBlock: 499476
+    processor:
+      file: './node_modules/@subql/contract-processors/dist/moonbeam.js'
+      options:
+        abi: Vaults
+        address: '0x7e6E03822D0077F3C417D33caeAc900Fc2645679'
+    assets:
+      Vaults:
+        file: './abis/Vaults.json'
+    mapping:
+      file: './dist/index.js'
+      handlers:
+        - handler: handleDepositEvent
+          kind: substrate/MoonbeamEvent
+          filter:
+            topics:
+              - Deposit(address indexed user, uint256 indexed pid, uint256 amount)
+        - handler: handleWithdrawEvent
+          kind: substrate/MoonbeamEvent
+          filter:
+            topics:
+              - Withdraw(address indexed user, uint256 indexed pid, uint256 amount)
+

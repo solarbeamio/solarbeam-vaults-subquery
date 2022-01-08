@@ -1,0 +1,9 @@
+type Action @entity {
+  id: ID!
+  pid: Int! # pool id
+  type: String!
+  user: String!
+  amount: BigInt!
+  blockNumber: Int!
+  time: Date!
+}
