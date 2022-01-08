@@ -8,13 +8,16 @@ type WithdrawEventArgs = [string, BigNumber, BigNumber] & { user: string; pid: B
 
 async function saveAction(event, type){
     let action = new Action(event.transactionHash)
+    logger.debug('pid')
     action.pid = event.args.pid.toNumber();
     action.type = type
     action.user = event.args.user;
+    logger.debug('amount')
     action.amount = event.args.amount.toBigInt();
+    logger.debug('blockNumber')
     action.blockNumber = event.blockNumber
+    logger.debug('blockTimestamp')
     action.time = event.blockTimestamp
-    logger.info(action)
     await action.save();
 }
 
