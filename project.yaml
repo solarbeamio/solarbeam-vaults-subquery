@@ -18,7 +18,7 @@ dataSources:
       file: './node_modules/@subql/contract-processors/dist/moonbeam.js'
       options:
         abi: Vaults
-        address: '0x7e6E03822D0077F3C417D33caeAc900Fc2645679'
+        address: '0x7e6e03822d0077f3c417d33caeac900fc2645679'
     assets:
       Vaults:
         file: './abis/Vaults.json'
